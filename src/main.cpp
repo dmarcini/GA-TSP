@@ -25,7 +25,7 @@ std::vector<std::vector<int>> load_data(const std::string &path)
 
             matrix[i].push_back(value);         
         }
-    }
+    }dmarcini@
 
     return matrix;
 }
