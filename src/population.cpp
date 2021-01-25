@@ -10,12 +10,6 @@
 #include "graph.hpp"
 
 
-Population::Population(int chromosome_size)
-    : chromosome_size_(chromosome_size)
-{
-}
-
-
 void Population::generate_specimens(int size)
 {
     for (int i {0}; i < size; ++i) {
@@ -25,9 +19,9 @@ void Population::generate_specimens(int size)
             chromosome.push_back(j);
         }
 
-        std::shuffle(chromosome.begin(), chromosome.begin(),
+        std::shuffle(chromosome.begin(), chromosome.end(),
                      std::mt19937{std::random_device{}()});
-
+    
         specimens_.emplace_back(chromosome);
     }
 }
@@ -39,7 +33,7 @@ void Population::add_specimen(const Specimen &specimen)
 }
 
 
-Specimen Population::get_specimen(int number)
+Specimen& Population::get_specimen(int number)
 {
     return specimens_[number];
 }

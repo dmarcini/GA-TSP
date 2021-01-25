@@ -9,14 +9,14 @@
 class Population
 {
 public:
-    Population(int chromosome_size);
-
     size_t size() { return specimens_.size(); }
+
+    int& chromosome_size() { return chromosome_size_; }
 
     void generate_specimens(int size);
 
     void add_specimen(const Specimen &pecimen);
-    Specimen get_specimen(int number);
+    Specimen& get_specimen(int number);
     Specimen get_random_specimen();
     void pop_specimen();
 

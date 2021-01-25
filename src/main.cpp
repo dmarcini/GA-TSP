@@ -6,6 +6,8 @@
 
 #include "menu.hpp"
 
+#include "genetic_algorithm.hpp"
+
 
 std::vector<std::vector<int>> load_data(const std::string &path)
 {
@@ -31,26 +33,31 @@ std::vector<std::vector<int>> load_data(const std::string &path)
 }
 
 int main() {
+    GeneticAlgorithm ga;
+
     utility::Menu menu("\nTraveling Salesman Problem - "
                        "Genetic Algorithm");
 
     bool was_data_loaded {false};
 
-    menu.append({"Load data", [&was_data_loaded]() { 
+    menu.append({"Load data", [&ga, &was_data_loaded]() { 
+        ga.load_data("graphs/ftv47.atsp", load_data);
 
         was_data_loaded = true;
     }});
-    menu.append({"Enter stop criterium", []() {
-
+    menu.append({"Enter stop criterium", [&ga]() {
+        ga.enter_stop_criterium();
     }});
-    menu.append({"Enter algorithm parameters", []() {
-
+    menu.append({"Enter algorithm parameters", [&ga]() {
+        ga.enter_algorithm_parameters();
     }});
-    menu.append({"Start", [&was_data_loaded]() {
+    menu.append({"Start", [&ga, &was_data_loaded]() {
         if (!was_data_loaded) {
             std::cout << "\nFirst load data!\n";
             return;
         }
+
+        ga.start();
     }});
 
     menu.show();
