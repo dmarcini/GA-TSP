@@ -18,8 +18,11 @@ public:
     Path& path() { return path_; }
 
     int& distance(size_t x, size_t y) { return edges_[x][y]; }
+    int distance(size_t x, size_t y) const { return edges_[x][y]; }
 
     void print_path();
+
+    int calculate_path_length(const std::vector<int> &route) const;
 private:
     std::vector<std::vector<int>> edges_;
 

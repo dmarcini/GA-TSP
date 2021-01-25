@@ -8,8 +8,9 @@ class Specimen
 {
 public:
     Specimen(int chromosome_size);
-    Specimen(std::vector<int> &&chromosome);
+    Specimen(const std::vector<int> &chromosome);
 
+    std::vector<int> chromosome() { return chromosome_; }
     int& gen(int number) { return chromosome_[number]; }
 
     bool contains_gen(int gen);

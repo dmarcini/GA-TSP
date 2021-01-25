@@ -25,3 +25,15 @@ void Graph::print_path()
 
     std::cout << "\nPath length: " << path_.length() << "\n\n";
 }
+
+
+int Graph::calculate_path_length(const std::vector<int> &route) const
+{
+    int path_length {0};
+
+    for (size_t i {0}; i < route.size() - 1; ++i) {
+        path_length += distance(route[i], route[i + 1]);
+    }
+
+    return path_length;
+}

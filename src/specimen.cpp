@@ -9,9 +9,9 @@ Specimen::Specimen(int chromosome_size)
 }
 
 
-Specimen::Specimen(std::vector<int> &&chromosome)
+Specimen::Specimen(const std::vector<int> &chromosome)
 {
-    chromosome_ == std::move(chromosome);
+    chromosome_ == chromosome;
 }
 
 
