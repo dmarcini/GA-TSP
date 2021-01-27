@@ -1,6 +1,8 @@
 #include "genetic_algorithm.hpp"
 
 #include <tuple>
+#include <iostream>
+#include <string>
 
 #include "scanner.hpp"
 #include "rand.hpp"
@@ -8,10 +10,17 @@
 #include "params.hpp"
 
 
-void GA::load_data(const std::string &path,
-                   LoadDataFcntPtr load_data)
+void GA::load_data(LoadDataFcntPtr load_data)
 {
-    graph_.load(load_data(path));
+    utility::Scanner scanner(std::cin);
+
+    std::cout << "\nEnter graph path: ";
+
+    while (!scanner.has_next()) {
+        std::cout << "\nEnter graph path: ";
+    }
+
+    graph_.load(load_data(scanner.next()));
 
     population_.chromosome_size() = graph_.size();
 }
@@ -164,11 +173,11 @@ double GA::get_double_parameter(std::string_view parameter)
 {
     utility::Scanner scanner(std::cin);
 
-    std::cout << "Enter " << parameter << ": ";
+    std::cout << "\nEnter " << parameter << ": ";
 
     while (!scanner.has_next_double()) {
         std::cout << parameter << " have to be double!\n";
-        std::cout << "Enter " << parameter << ": ";
+        std::cout << "\nEnter " << parameter << ": ";
     }
 
     return scanner.next_double();
@@ -179,11 +188,11 @@ int GA::get_int_parameter(std::string_view parameter)
 {
     utility::Scanner scanner(std::cin);
 
-    std::cout << "Enter " << parameter << ": ";
+    std::cout << "\nEnter " << parameter << ": ";
 
     while (!scanner.has_next_int()) {
         std::cout << parameter << " have to be integer!\n";
-        std::cout << "Enter " << parameter << ": ";
+        std::cout << "\nEnter " << parameter << ": ";
     }
 
     return scanner.next_int();
